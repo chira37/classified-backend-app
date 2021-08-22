@@ -1,0 +1,13 @@
+{
+    "editor.formatOnSave": false,
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.organizeImports": false
+    },
+    "cSpell.words": [
+        "Middlewares"
+    ],
+    "search.exclude": {
+        "**/node_modules": false
+    }
+}
