@@ -7,3 +7,13 @@ export enum httpResponse {
     CONFLICT = 409,
     NOT_FOUND = 404,
 }
+
+export enum roles {
+    SUPER_ADMIN = "super-admin",
+    ADMIN = "admin",
+    SUPER_EDITOR = "super-editor",
+    EDITOR = "editor",
+    USER = "user",
+    CONFLICT = 409,
+    NOT_FOUND = 404,
+}
