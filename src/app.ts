@@ -4,6 +4,7 @@ import cors from "cors";
 import morgan from "./middleware/morgan";
 import config from "./config";
 import { httpResponse } from "./utils/constants";
+import errorHandler from "./middleware/errorHandler";
 
 class App {
     public app: Application;
@@ -13,6 +14,7 @@ class App {
         this.initializeMiddlewares();
         this.initializeDevelopmentMiddlewares();
         this.initializeRouters(routers);
+        this.initializeErrorHandler();
     }
 
     public listen(): void {
@@ -37,6 +39,18 @@ class App {
         routers.forEach((router: Router) => {
             this.app.use("/api", router);
         });
+    }
+
+    private initializeErrorHandler() {
+        /**
+         * invalid api endpoints
+         */
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        this.app.use(function (_req, res: Response, _next) {
+            res.status(httpResponse.NOT_FOUND);
+            res.send("Not found");
+        });
+        this.app.use(errorHandler);
     }
 
     private connectToDatabase() {
