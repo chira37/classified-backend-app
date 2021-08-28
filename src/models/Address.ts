@@ -11,4 +11,10 @@ const addressSchema = new Schema({
 
 export default model<Address>("address", addressSchema);
 
+addressSchema.pre("save", function () {
+    if (this.isNew) {
+        this.id = this._id;
+    }
+});
+
 export { addressSchema };
