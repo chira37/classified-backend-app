@@ -23,9 +23,13 @@ const resetPasswordSchema = Joi.object({
     password: Joi.string().min(4).max(20).required(),
 });
 
+const updatePasswordSchema = Joi.object({
+    password: Joi.string().min(4).max(20).required(),
+});
 export = {
     signInSchema,
     signUpSchema,
     forgotPasswordSchema,
     resetPasswordSchema,
+    updatePasswordSchema,
 };
