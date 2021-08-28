@@ -68,6 +68,11 @@ class AuthController {
             if (!result) {
                 throw new APIError();
             }
+
+            /**
+             * implement send email with token
+             */
+
             res.json(token);
         } catch (error) {
             next(error);
@@ -116,6 +121,24 @@ class AuthController {
             next(error);
         }
     }
+
+    public updatePassword = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const result = await UserModel.findOneAndUpdate({ id: req.userId }, { password: req.body.password });
+
+            if (result) {
+                res.status(httpResponse.OK).json({
+                    success: true,
+                    message: "Password updated successfully",
+                    data: {},
+                });
+            } else {
+                throw new APIError("User not found", "NOT_FOUND", httpResponse.NOT_FOUND);
+            }
+        } catch (error) {
+            next(error);
+        }
+    };
 }
 
 export default AuthController;

@@ -31,8 +31,12 @@ const userSchema = new Schema<User>(
         address_1: addressSchema,
         address_2: addressSchema,
         profile_image: String,
-        role: Array,
+        role: String,
         note: String,
+        verified: {
+            type: Boolean,
+            default: false,
+        },
         active: Boolean,
         login_failed_count: Number,
         created_by: {
