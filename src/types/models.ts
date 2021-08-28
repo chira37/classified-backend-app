@@ -115,6 +115,12 @@ export interface Extra {
     value: number | ExtraValueOption | ExtraValueOption[];
 }
 
+export interface Brand {
+    id: string;
+    name: string;
+    icon_image: string;
+}
+
 // export interface PromotedAd {
 //     id: string;
 //     ad_id: string;

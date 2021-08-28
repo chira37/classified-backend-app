@@ -3,8 +3,8 @@ import CategoryController from "../controllers/CategoryController";
 import accessController from "../middleware/accessController";
 import validator from "../middleware/validator";
 import { roles } from "../utils/constants";
-import subCategoryValidator from "../validators/subCategoryValidator";
-const { createSchema, updateSchema } = subCategoryValidator;
+import categoryValidator from "../validators/categoryValidator";
+const { createSchema, updateSchema } = categoryValidator;
 
 const categoryController = new CategoryController();
 const router = Router({ strict: true });
@@ -20,7 +20,7 @@ router.get("/category", categoryController.getAllWithReferenceSubCategories);
 
 router.post("/system/category", accessController([roles.SUPER_ADMIN]), validator(createSchema), categoryController.add);
 router.put(
-    "/system/sub-category/:id",
+    "/system/category/:id",
     accessController([roles.SUPER_ADMIN]),
     validator(updateSchema),
     categoryController.update
