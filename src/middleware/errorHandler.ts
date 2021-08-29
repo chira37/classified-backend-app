@@ -22,8 +22,14 @@ const errorHandler = (err: ErrorType, _req: Request, res: Response, _next: NextF
 };
 
 const handleDuplicateKeyError = (err: ErrorType, res: Response) => {
-    const field = Object.keys(err.keyValue);
-    const message = `${field} already exists`;
+    let message;
+    if (err.keyValue) {
+        const field = Object.keys(err.keyValue);
+        message = `${field} already exists`;
+    } else {
+        message = "Duplicate error";
+    }
+
     res.status(httpResponse.CONFLICT);
     res.json({ success: false, message: message, name: "DUPLICATE_ERROR", data: {} });
 };

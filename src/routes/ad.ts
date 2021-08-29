@@ -20,22 +20,22 @@ router.get("/ad/my-ads/", accessController([roles.USER]), adController.getMyAds)
 router.get("/system/table/", accessController([roles.SUPER_ADMIN]), adController.getTableList);
 
 /**
- * create ad from user side
+ * create ad from user side ( without "status")
  */
 router.post("/ad", accessController([roles.USER]), validator(limitedCreateSchema), adController.add);
 
 /**
- * create ad from admin panel ( "status" is include)
+ * create ad from admin panel ( "status" is included)
  */
-router.post("system/ad", accessController([roles.SUPER_ADMIN]), validator(limitedCreateSchema), adController.add);
+router.post("system/ad", accessController([roles.SUPER_ADMIN]), validator(fullCreateSchema), adController.add);
 
 /**
- * update ad from user side
+ * update ad from user side  ( without "status" , user have no access to status)
  */
 router.put("/ad/:id", accessController([roles.USER]), validator(limitedUpdateSchema), adController.update);
 
 /**
- * update ad from admin panel ( "status" is include)
+ * update ad from admin panel ( "status" is included)
  */
 router.put("/system/ad/:id", accessController([roles.SUPER_ADMIN]), validator(fullUpdateSchema), adController.update);
 
