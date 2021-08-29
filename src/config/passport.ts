@@ -32,6 +32,32 @@ passport.use(
 );
 
 passport.use(
+    "signUpAdmin",
+    new LocalStrategy(
+        {
+            usernameField: "email",
+            passwordField: "password",
+        },
+        async (email: string, password: string, done) => {
+            try {
+                const doc = new UserModel({ email, password, role: roles.EDITOR });
+                const res = await doc.save();
+
+                const userDetails = {
+                    id: res.id,
+                    email: res.email,
+                    role: res.role,
+                };
+
+                return done(null, userDetails);
+            } catch (error) {
+                done(error);
+            }
+        }
+    )
+);
+
+passport.use(
     "signIn",
     new LocalStrategy(
         {

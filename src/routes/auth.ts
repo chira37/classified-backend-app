@@ -17,7 +17,13 @@ router.post(
     passport.authenticate("signUp", { session: false }),
     userController.signUp
 );
-router.get("/auth/signin", validator(signInSchema), userController.signIn);
+router.post(
+    "/system/auth/signup",
+    validator(signUpSchema),
+    passport.authenticate("signUpAdmin", { session: false }),
+    userController.signUp
+);
+router.post("/auth/signin", validator(signInSchema), userController.signIn);
 router.put("/auth/forgot-password", validator(forgotPasswordSchema), userController.forgotPassword);
 router.put("/auth/reset-password", validator(resetPasswordSchema), userController.resetPassword);
 router.put(

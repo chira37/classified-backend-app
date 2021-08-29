@@ -33,7 +33,7 @@ class AuthController {
                     res.json({
                         success: true,
                         message: "Sign In success",
-                        data: { ...user, token },
+                        data: { user, token },
                     });
                 });
             } catch (error) {
