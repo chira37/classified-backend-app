@@ -121,6 +121,16 @@ export interface Brand {
     icon_image: string;
 }
 
+export interface City {
+    id: string;
+    name: string;
+    province_id: string;
+}
+export interface Province {
+    id: string;
+    name: string;
+}
+
 // export interface PromotedAd {
 //     id: string;
 //     ad_id: string;
