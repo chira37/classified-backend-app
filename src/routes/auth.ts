@@ -24,9 +24,9 @@ router.post(
     userController.signUp
 );
 router.post("/auth/signin", validator(signInSchema), userController.signIn);
-router.put("/auth/forgot-password", validator(forgotPasswordSchema), userController.forgotPassword);
-router.put("/auth/reset-password", validator(resetPasswordSchema), userController.resetPassword);
-router.put(
+router.post("/auth/forgot-password", validator(forgotPasswordSchema), userController.forgotPassword);
+router.post("/auth/reset-password", validator(resetPasswordSchema), userController.resetPassword);
+router.post(
     "/auth/update-password",
     accessController([roles.USER]),
     validator(updatePasswordSchema),

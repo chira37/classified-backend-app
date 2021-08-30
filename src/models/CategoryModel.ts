@@ -1,9 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, model } from "mongoose";
+import { nanoid } from "nanoid";
 import { Category } from "../types/models";
 
 const categorySchema = new Schema<Category>(
     {
+        _id: {
+            type: String,
+            default: () => nanoid(12),
+        },
         id: {
             type: String,
             requires: true,

@@ -1,10 +1,15 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, model } from "mongoose";
 import mongooseLeanVirtuals from "mongoose-lean-virtuals";
+import { nanoid } from "nanoid";
 import { City } from "../types/models";
 
 const citySchema = new Schema<City>(
     {
+        _id: {
+            type: String,
+            default: () => nanoid(12), // url friendly id
+        },
         name: String,
         province_id: {
             type: Schema.Types.ObjectId,
@@ -22,6 +27,9 @@ const citySchema = new Schema<City>(
     { timestamps: { createdAt: "created_at", updatedAt: "updated_at" }, toJSON: { virtuals: true } }
 );
 
+/**
+ * virtual middleware is not available since insert many is used therefore virtual is used in to include id on the get, find result
+ */
 citySchema.virtual("id").get(function () {
     return this._id.toString();
 });

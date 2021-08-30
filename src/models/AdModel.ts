@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, model } from "mongoose";
+import { nanoid } from "nanoid";
 import { Ad, Extra } from "../types/models";
 
 // const extraValueSchema = new Schema<ExtraValue>({

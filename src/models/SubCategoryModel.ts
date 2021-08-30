@@ -1,8 +1,13 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, model } from "mongoose";
+import { nanoid } from "nanoid";
 import { ExtraField, ExtraFieldOption, SubCategory } from "../types/models";
 
 const extraFieldOptionSchema = new Schema<ExtraFieldOption>({
+    _id: {
+        type: String,
+        default: () => nanoid(12), // url friendly id
+    },
     id: { type: String, unique: true, sparse: true },
     name: String,
 });
@@ -14,6 +19,10 @@ extraFieldOptionSchema.pre("save", function () {
 });
 
 const extraFieldSchema = new Schema<ExtraField>({
+    _id: {
+        type: String,
+        default: () => nanoid(12), // url friendly id
+    },
     id: { type: String, unique: true, sparse: true },
     name: String,
     type: String,
@@ -28,6 +37,10 @@ extraFieldSchema.pre("save", function () {
 
 const subCategorySchema = new Schema<SubCategory>(
     {
+        _id: {
+            type: String,
+            default: () => nanoid(12), // url friendly id
+        },
         id: {
             type: String,
             requires: true,

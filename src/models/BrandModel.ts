@@ -1,12 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, model } from "mongoose";
+import { nanoid } from "nanoid";
 import { Brand } from "../types/models";
 
 const brandSchema = new Schema<Brand>(
     {
+        _id: {
+            type: String,
+            default: () => nanoid(12), // url friendly id
+        },
         id: {
             type: String,
             requires: true,
+            unique: true,
+        },
+        slug: {
+            type: String,
+            require: true,
             unique: true,
         },
         name: String,
