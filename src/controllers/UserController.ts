@@ -130,9 +130,7 @@ class AdController extends BaseController<User> {
         try {
             const id = req.params.id;
 
-            const result = await UserModel.findById(id).lean().select({
-                password: -1,
-            });
+            const result = await UserModel.findById(id).lean().select("-_id -password");
 
             if (result) {
                 res.status(httpResponse.OK).json({
@@ -164,7 +162,7 @@ class AdController extends BaseController<User> {
             const result = await this.model
                 .find(filterQuery)
                 .lean()
-                .select("id first_name role active")
+                .select("id email phone_no_1 first_name role active")
                 .sort(sort)
                 .skip((parseInt(page as string) - 1) * parseInt(rows as string))
                 .limit(parseInt(rows as string));

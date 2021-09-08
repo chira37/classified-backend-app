@@ -26,7 +26,7 @@ router.get(
     userController.verifyEmail
 );
 
-router.get("/system/category/table/", accessController([roles.SUPER_ADMIN]), userController.getTableList);
+router.get("/system/user/table/", accessController([roles.SUPER_ADMIN]), userController.getTableList);
 
 /**
  * create user from admin panel
@@ -48,7 +48,7 @@ router.put(
     userController.update
 );
 
-router.delete("/user/:id", accessController([roles.USER, roles.SUPER_ADMIN]), userController.delete);
+router.delete("/system/user/:id", accessController([roles.USER, roles.SUPER_ADMIN]), userController.delete);
 
 /**
  * user can only get limited details and full details are only available to admin panel only

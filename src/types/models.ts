@@ -52,6 +52,8 @@ export interface Ad {
     id: string;
     user_id: string;
     shop_id: string;
+    category_id: string;
+    sub_category_id: string;
     url: string;
     title: string;
     description: string;
@@ -64,7 +66,8 @@ export interface Ad {
     phone_number_2: string;
     extras: Extra[];
     active: boolean;
-    status: string;
+    status: "reject" | "active" | "disable" | "update" | "new";
+    note: string;
     view_count: number;
     created_by: User;
     updated_by: User;

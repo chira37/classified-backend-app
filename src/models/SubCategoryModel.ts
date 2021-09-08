@@ -3,6 +3,10 @@ import { Schema, model } from "mongoose";
 import { nanoid } from "nanoid";
 import { ExtraField, ExtraFieldOption, SubCategory } from "../types/models";
 
+/**
+ * extra field option schema
+ */
+
 const extraFieldOptionSchema = new Schema<ExtraFieldOption>({
     _id: {
         type: String,
@@ -18,6 +22,9 @@ extraFieldOptionSchema.pre("save", function () {
     }
 });
 
+/**
+ * extra field schema
+ */
 const extraFieldSchema = new Schema<ExtraField>({
     _id: {
         type: String,
@@ -39,7 +46,7 @@ const subCategorySchema = new Schema<SubCategory>(
     {
         _id: {
             type: String,
-            default: () => nanoid(12), // url friendly id
+            default: () =>  nanoid(12), // url friendly id
         },
         id: {
             type: String,
@@ -51,7 +58,7 @@ const subCategorySchema = new Schema<SubCategory>(
         extra_fields: [extraFieldSchema],
         brand_id: [
             {
-                type: Schema.Types.ObjectId,
+                type: Schema.Types.String,
                 ref: "brand",
             },
         ],

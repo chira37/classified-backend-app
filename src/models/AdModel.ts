@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Schema, model } from "mongoose";
-import { nanoid } from "nanoid";
 import { Ad, Extra } from "../types/models";
 
 // const extraValueSchema = new Schema<ExtraValue>({
@@ -56,6 +55,14 @@ const adSchema = new Schema<Ad>(
             type: Schema.Types.ObjectId,
             ref: "shop",
         },
+        category_id: {
+            type: Schema.Types.ObjectId,
+            ref: "category",
+        },
+        sub_category_id: {
+            type: Schema.Types.ObjectId,
+            ref: "subCategory",
+        },
         url: {
             type: String,
             unique: true,
@@ -76,8 +83,9 @@ const adSchema = new Schema<Ad>(
         },
         status: {
             type: String,
-            default: "disable",
+            default: "new",
         },
+        note: String,
         view_count: {
             type: Number,
             default: 0,

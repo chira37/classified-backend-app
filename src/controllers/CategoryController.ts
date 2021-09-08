@@ -83,6 +83,19 @@ class CategoryController extends BaseController<Category> {
             next(error);
         }
     };
+
+    public getAll = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const result = await this.model.find().lean().populate("sub_category_id");
+            res.status(httpResponse.OK).json({
+                success: true,
+                message: `${this.modelName} data fetched successfully`,
+                data: result,
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
 }
 
 export default CategoryController;

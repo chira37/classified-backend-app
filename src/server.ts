@@ -9,6 +9,7 @@ import brandRouter from "./routes/brand";
 import provinceRouter from "./routes/province";
 import cityRouter from "./routes/city";
 import userRouter from "./routes/user";
+import uploadRouter from "./routes/upload";
 
 const app = new App([
     authRouter,
@@ -19,6 +20,7 @@ const app = new App([
     brandRouter,
     provinceRouter,
     cityRouter,
+    uploadRouter,
 ]);
 app.listen();
 

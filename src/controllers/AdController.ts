@@ -113,6 +113,26 @@ class AdController extends BaseController<Ad> {
         }
     };
 
+    public changeStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const { id } = req.params;
+            const data = { ...req.body, updated_by: req.userId };
+            const result = await this.model.findByIdAndUpdate(id, data, { new: true });
+
+            if (result) {
+                res.status(httpResponse.OK).json({
+                    success: true,
+                    message: "Status changed successfully",
+                    data: result,
+                });
+            } else {
+                throw new APIError("Ad not found", "NOT_FOUND", httpResponse.NOT_FOUND);
+            }
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public getMyAds = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { page = 1, rows = 10 } = req.query;

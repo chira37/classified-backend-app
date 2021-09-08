@@ -14,11 +14,7 @@ const brandSchema = new Schema<Brand>(
             requires: true,
             unique: true,
         },
-        slug: {
-            type: String,
-            require: true,
-            unique: true,
-        },
+
         name: String,
         icon_image: String,
         created_by: {

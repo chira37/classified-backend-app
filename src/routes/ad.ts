@@ -4,7 +4,8 @@ import accessController from "../middleware/accessController";
 import validator from "../middleware/validator";
 import { roles } from "../utils/constants";
 import adValidator from "../validators/adValidator";
-const { limitedCreateSchema, fullCreateSchema, limitedUpdateSchema, fullUpdateSchema } = adValidator;
+const { limitedCreateSchema, fullCreateSchema, limitedUpdateSchema, fullUpdateSchema, changeStatusSchema } =
+    adValidator;
 
 const adController = new AdController();
 const router = Router({ strict: true });
@@ -13,6 +14,13 @@ const router = Router({ strict: true });
  * user ads with pagination
  */
 router.get("/ad/my-ads/", accessController([roles.USER]), adController.getMyAds);
+
+router.put(
+    "/system/ad/change-status/:id",
+    accessController([roles.SUPER_ADMIN]),
+    validator(changeStatusSchema),
+    adController.changeStatus
+);
 
 /**
  * admin panel table with pagination

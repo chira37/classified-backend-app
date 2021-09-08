@@ -8,6 +8,12 @@ const baseSchema = Joi.object({
     shop_id: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
         .messages({ "string.pattern.base": "Invalid shop id" }),
+    category_id: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .messages({ "string.pattern.base": "Invalid category id" }),
+    sub_category_id: Joi.string()
+        .regex(/^[0-9a-fA-F]{24}$/)
+        .messages({ "string.pattern.base": "Invalid Sub category id" }),
     title: Joi.string().required().max(50),
     description: Joi.string().min(10).max(400).required(),
     condition: Joi.string().required(),
@@ -29,9 +35,15 @@ const fullCreateSchema = baseSchema.keys({
     status: Joi.string().required(),
 });
 
+const changeStatusSchema = Joi.object({
+    status: Joi.string().required(),
+    note: Joi.string().allow("").max(400),
+});
+
 export = {
     limitedCreateSchema: baseSchema,
     limitedUpdateSchema: baseSchema,
     fullUpdateSchema,
     fullCreateSchema,
+    changeStatusSchema,
 };

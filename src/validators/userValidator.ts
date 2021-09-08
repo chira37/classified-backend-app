@@ -1,10 +1,10 @@
 import Joi from "joi";
 
 const baseSchema = Joi.object({
-    first_name: Joi.string().required().max(20),
-    last_name: Joi.string().required().max(20),
-    phone_number_1: Joi.string().required(),
-    phone_number_2: Joi.string().optional(),
+    first_name: Joi.string().allow("").max(20),
+    last_name: Joi.string().allow("").max(20),
+    phone_no_1: Joi.string().optional(),
+    phone_no_2: Joi.string().optional(),
     address_1: Joi.object().keys({
         line_1: Joi.string().allow("").max(40),
         line_2: Joi.string().allow("").max(40),
@@ -19,7 +19,7 @@ const baseSchema = Joi.object({
         province: Joi.string().allow("").max(20),
         zip_code: Joi.string().allow("").max(10),
     }),
-    profile_image: Joi.string(),
+    profile_image: Joi.string().allow(""),
     note: Joi.string().allow("").max(400),
     active: Joi.boolean(),
 });

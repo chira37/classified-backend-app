@@ -27,6 +27,6 @@ router.put(
 );
 router.delete("/system/category/:id", accessController([roles.SUPER_ADMIN]), categoryController.delete); // super admin
 router.get("/system/category/:id", accessController([roles.SUPER_ADMIN]), categoryController.get); // super admin
-router.get("/system/category", accessController([roles.SUPER_ADMIN]), categoryController.getAll); // super admin
+router.get("/category", accessController([roles.SUPER_ADMIN, roles.USER]), categoryController.getAll); // super admin
 
 export default router;

@@ -37,7 +37,10 @@ const userSchema = new Schema<User>(
             type: Boolean,
             default: false,
         },
-        active: Boolean,
+        active: {
+            type: Boolean,
+            default: true,
+        },
         login_failed_count: Number,
         created_by: {
             type: Schema.Types.ObjectId,
