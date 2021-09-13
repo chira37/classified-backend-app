@@ -20,14 +20,15 @@ class ProvinceController {
             if (!provinceResult) {
                 throw new APIError();
             }
-
-            const cities = req.body.cities.map((item: City) => ({
-                ...item,
-                province_id: provinceResult._id,
-                created_by: userId,
-                updated_by: userId,
-            }));
-            const cityResult = await CityModel.insertMany(cities);
+            if (req.body.cities) {
+                const cities = req.body.cities.map((item: City) => ({
+                    ...item,
+                    province_id: provinceResult._id,
+                    created_by: userId,
+                    updated_by: userId,
+                }));
+                const cityResult = await CityModel.insertMany(cities);
+            }
 
             res.status(httpResponse.OK).json({
                 success: true,
@@ -46,7 +47,7 @@ class ProvinceController {
              * get province with nested city data
              */
             const provinceResult = await ProvinceModel.findById(id).lean();
-            const cityResult = await CityModel.find({ province_id: id }).lean();
+            const cityResult = await CityModel.find({ province_id: id }).lean({ virtuals: true }).select("id name");
             const result = { ...provinceResult, cities: cityResult };
 
             res.status(httpResponse.OK).json({
@@ -131,6 +132,19 @@ class ProvinceController {
                 success: true,
                 message: "Province deleted successfully",
                 data: {},
+            });
+        } catch (error) {
+            next(error);
+        }
+    };
+
+    public getAll = async (_req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const result = await ProvinceModel.find().lean().select("id name");
+            res.status(httpResponse.OK).json({
+                success: true,
+                message: "Province data fetched successfully",
+                data: result,
             });
         } catch (error) {
             next(error);

@@ -12,7 +12,7 @@ const citySchema = new Schema<City>(
         },
         name: String,
         province_id: {
-            type: Schema.Types.ObjectId,
+            type: Schema.Types.String,
             ref: "province",
         },
         created_by: {
@@ -24,7 +24,7 @@ const citySchema = new Schema<City>(
             ref: "user",
         },
     },
-    { timestamps: { createdAt: "created_at", updatedAt: "updated_at" }, toJSON: { virtuals: true } }
+    { timestamps: { createdAt: "created_at", updatedAt: "updated_at" } }
 );
 
 /**

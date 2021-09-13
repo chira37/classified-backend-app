@@ -184,8 +184,8 @@ class AdController extends BaseController<Ad> {
                 .find(filterQuery)
                 .lean()
                 .populate([
-                    { path: "user_id", select: "id name" },
-                    { path: "shop_id", select: "id name" },
+                    { path: "user_id", select: "id first_name" },
+                    { path: "shop_id", select: "id first_name" },
                 ])
                 .select("id title active status view_count")
                 .sort(sort)

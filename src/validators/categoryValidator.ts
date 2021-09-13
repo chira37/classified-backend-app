@@ -5,8 +5,7 @@ const baseSchema = Joi.object({
     icon_image: Joi.string(),
     sub_category_id: Joi.array().items(
         Joi.string()
-            .regex(/^[0-9a-fA-F]{24}$/)
-            .required()
+            .regex(/^[0-9a-zA-Z-_]{12}$/)
             .messages({ "string.pattern.base": "Invalid sub category id" })
     ),
 });

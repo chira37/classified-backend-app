@@ -13,7 +13,7 @@ class CityController extends BaseController<City> {
     public getByProvinceId = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const { province_id } = req.params;
-            const result = await this.model.find({ province_id }).select("id name");
+            const result = await CityModel.find({ province_id }).lean({ virtuals: true }).select("id name");
             if (result) {
                 res.status(httpResponse.OK).json({
                     success: true,

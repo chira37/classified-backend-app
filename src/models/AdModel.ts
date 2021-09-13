@@ -56,11 +56,11 @@ const adSchema = new Schema<Ad>(
             ref: "shop",
         },
         category_id: {
-            type: Schema.Types.ObjectId,
+            type: Schema.Types.String,
             ref: "category",
         },
         sub_category_id: {
-            type: Schema.Types.ObjectId,
+            type: Schema.Types.String,
             ref: "subCategory",
         },
         url: {
@@ -72,8 +72,14 @@ const adSchema = new Schema<Ad>(
         condition: String,
         price: Number,
         images: Array,
-        city_id: String,
-        province_id: String,
+        city_id: {
+            type: Schema.Types.String,
+            ref: "city",
+        },
+        province_id: {
+            type: Schema.Types.String,
+            ref: "province",
+        },
         phone_number_1: String,
         phone_number_2: String,
         extras: [extraSchema],

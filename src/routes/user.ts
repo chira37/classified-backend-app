@@ -9,7 +9,7 @@ const { createSchema, limitedUpdateSchema, fullUpdateSchema, updateEmailSchema, 
 const userController = new UserController();
 const router = Router({ strict: true });
 
-router.get("/system/category/search/", accessController([roles.SUPER_ADMIN]), userController.search);
+router.get("/system/user/search/", accessController([roles.SUPER_ADMIN]), userController.search);
 /**
  * update new email
  */

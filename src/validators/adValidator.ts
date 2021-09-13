@@ -9,21 +9,21 @@ const baseSchema = Joi.object({
         .regex(/^[0-9a-fA-F]{24}$/)
         .messages({ "string.pattern.base": "Invalid shop id" }),
     category_id: Joi.string()
-        .regex(/^[0-9a-fA-F]{24}$/)
+        .regex(/^[0-9a-zA-Z-_]{12}$/)
         .messages({ "string.pattern.base": "Invalid category id" }),
     sub_category_id: Joi.string()
-        .regex(/^[0-9a-fA-F]{24}$/)
+        .regex(/^[0-9a-zA-Z-_]{12}$/)
         .messages({ "string.pattern.base": "Invalid Sub category id" }),
     title: Joi.string().required().max(50),
     description: Joi.string().min(10).max(400).required(),
     condition: Joi.string().required(),
     price: Joi.number().required(),
-    images: Joi.array().required(),
+    images: Joi.array(), // .required(), fix this
     city_id: Joi.string().required().max(20),
     province_id: Joi.string().required().max(20),
-    phone_number_1: Joi.string().required(),
-    phone_number_2: Joi.string().optional(),
-    extras: Joi.array().required(),
+    phone_no_1: Joi.string().required(),
+    phone_no_2: Joi.string().optional(),
+    extras: Joi.array(),
     active: Joi.boolean().required(),
 });
 
@@ -43,7 +43,7 @@ const changeStatusSchema = Joi.object({
 export = {
     limitedCreateSchema: baseSchema,
     limitedUpdateSchema: baseSchema,
-    fullUpdateSchema,
-    fullCreateSchema,
+    fullUpdateSchema: baseSchema,
+    fullCreateSchema: baseSchema,
     changeStatusSchema,
 };

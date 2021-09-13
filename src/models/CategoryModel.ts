@@ -18,7 +18,7 @@ const categorySchema = new Schema<Category>(
         icon_image: String,
         sub_category_id: [
             {
-                type: Schema.Types.ObjectId,
+                type: Schema.Types.String,
                 ref: "subCategory",
             },
         ],

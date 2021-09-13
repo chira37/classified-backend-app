@@ -25,7 +25,7 @@ router.put(
 /**
  * admin panel table with pagination
  */
-router.get("/system/table/", accessController([roles.SUPER_ADMIN]), adController.getTableList);
+router.get("/system/ad/table/", accessController([roles.SUPER_ADMIN]), adController.getTableList);
 
 /**
  * create ad from user side ( without "status")
@@ -35,7 +35,7 @@ router.post("/ad", accessController([roles.USER]), validator(limitedCreateSchema
 /**
  * create ad from admin panel ( "status" is included)
  */
-router.post("system/ad", accessController([roles.SUPER_ADMIN]), validator(fullCreateSchema), adController.add);
+router.post("/system/ad", accessController([roles.SUPER_ADMIN]), validator(fullCreateSchema), adController.add);
 
 /**
  * update ad from user side  ( without "status" , user have no access to status)
@@ -54,6 +54,6 @@ router.delete(
 );
 router.get("/ad/:url", adController.getByUrl);
 router.get("/system/ad/:url", adController.getByUrl);
-router.get("/ad", accessController, adController.getAll);
+router.get("/system/ad", accessController, adController.getAll);
 
 export default router;
