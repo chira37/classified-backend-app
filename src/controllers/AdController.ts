@@ -90,6 +90,24 @@ class AdController extends BaseController<Ad> {
         }
     };
 
+    public getStatus = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+        try {
+            const result = await this.model.findOne({ id: req.params.id }).lean().select("status note");
+
+            if (result) {
+                res.status(httpResponse.OK).json({
+                    success: true,
+                    message: "Ad status fetched successful",
+                    data: result,
+                });
+            } else {
+                throw new APIError("Ad not found", "NOT_FOUND", httpResponse.NOT_FOUND);
+            }
+        } catch (error) {
+            next(error);
+        }
+    };
+
     public delete = async (req: Request, res: Response, next: NextFunction): Promise<void> => {
         try {
             const adId = req.params.id;
@@ -187,7 +205,7 @@ class AdController extends BaseController<Ad> {
                     { path: "user_id", select: "id first_name" },
                     { path: "shop_id", select: "id first_name" },
                 ])
-                .select("id title active status view_count")
+                .select("id title active status view_count brand_id category_id created_at")
                 .sort(sort)
                 .skip((parseInt(page as string) - 1) * parseInt(rows as string))
                 .limit(parseInt(rows as string));

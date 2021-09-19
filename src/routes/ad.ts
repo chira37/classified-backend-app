@@ -23,9 +23,15 @@ router.put(
 );
 
 /**
+ * get add status in admin side to update the status
+ */
+
+router.get("/system/ad/status/:id", accessController([roles.SUPER_ADMIN]), adController.getStatus);
+
+/**
  * admin panel table with pagination
  */
-router.get("/system/ad/table/", accessController([roles.SUPER_ADMIN]), adController.getTableList);
+router.get("/system/ad/table/", adController.getTableList);
 
 /**
  * create ad from user side ( without "status")
@@ -53,7 +59,7 @@ router.delete(
     adController.delete
 );
 router.get("/ad/:url", adController.getByUrl);
-router.get("/system/ad/:url", adController.getByUrl);
+router.get("/system/ad/:id", adController.get);
 router.get("/system/ad", accessController, adController.getAll);
 
 export default router;

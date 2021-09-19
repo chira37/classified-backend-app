@@ -48,12 +48,15 @@ export interface Address {
     zip_code: Date;
 }
 
+type Extras = {
+    [key: string]: string;
+};
 export interface Ad {
     id: string;
     user_id: string;
     shop_id: string;
     category_id: string;
-    sub_category_id: string;
+    brand_id: string;
     url: string;
     title: string;
     description: string;
@@ -62,9 +65,9 @@ export interface Ad {
     images: string[];
     city_id: string;
     province_id: string;
-    phone_number_1: string;
-    phone_number_2: string;
-    extras: Extra[];
+    phone_no_1: string;
+    phone_no_2: string;
+    extras: Extras;
     active: boolean;
     status: "reject" | "active" | "disable" | "update" | "new";
     note: string;

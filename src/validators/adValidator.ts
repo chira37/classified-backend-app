@@ -8,12 +8,8 @@ const baseSchema = Joi.object({
     shop_id: Joi.string()
         .regex(/^[0-9a-fA-F]{24}$/)
         .messages({ "string.pattern.base": "Invalid shop id" }),
-    category_id: Joi.string()
-        .regex(/^[0-9a-zA-Z-_]{12}$/)
-        .messages({ "string.pattern.base": "Invalid category id" }),
-    sub_category_id: Joi.string()
-        .regex(/^[0-9a-zA-Z-_]{12}$/)
-        .messages({ "string.pattern.base": "Invalid Sub category id" }),
+    category_id: Joi.string().required(),
+    brand_id: Joi.string().required(),
     title: Joi.string().required().max(50),
     description: Joi.string().min(10).max(400).required(),
     condition: Joi.string().required(),
@@ -23,7 +19,7 @@ const baseSchema = Joi.object({
     province_id: Joi.string().required().max(20),
     phone_no_1: Joi.string().required(),
     phone_no_2: Joi.string().optional(),
-    extras: Joi.array(),
+    extras: Joi.object(),
     active: Joi.boolean().required(),
 });
 

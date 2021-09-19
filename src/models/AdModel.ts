@@ -23,22 +23,22 @@ import { Ad, Extra } from "../types/models";
 //     }
 // });
 
-const extraSchema = new Schema<Extra>({
-    id: {
-        type: String,
-        requires: true,
-        unique: true,
-    },
-    extra_field_id: String,
-    extra_field_name: String,
-    value: Schema.Types.Mixed,
-});
+// const extraSchema = new Schema<Extra>({
+//     id: {
+//         type: String,
+//         requires: true,
+//         unique: true,
+//     },
+//     extra_field_id: String,
+//     extra_field_name: String,
+//     value: Schema.Types.Mixed,
+// });
 
-extraSchema.pre("save", function () {
-    if (this.isNew) {
-        this.id = this._id;
-    }
-});
+// extraSchema.pre("save", function () {
+//     if (this.isNew) {
+//         this.id = this._id;
+//     }
+// });
 
 const adSchema = new Schema<Ad>(
     {
@@ -55,14 +55,9 @@ const adSchema = new Schema<Ad>(
             type: Schema.Types.ObjectId,
             ref: "shop",
         },
-        category_id: {
-            type: Schema.Types.String,
-            ref: "category",
-        },
-        sub_category_id: {
-            type: Schema.Types.String,
-            ref: "subCategory",
-        },
+        category_id: String,
+        brand_id: String,
+
         url: {
             type: String,
             unique: true,
@@ -80,9 +75,9 @@ const adSchema = new Schema<Ad>(
             type: Schema.Types.String,
             ref: "province",
         },
-        phone_number_1: String,
-        phone_number_2: String,
-        extras: [extraSchema],
+        phone_no_1: String,
+        phone_no_2: String,
+        extras: Object,
         active: {
             type: Boolean,
             default: true,
